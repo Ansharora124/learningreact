@@ -10,7 +10,7 @@ function App() {
   const handleInputChange = (event) => {
     // update state so the UI reflects typing
     setInputValue(event.target.value)
-    console.log(event.target.value)
+    
   }
 
   return (
