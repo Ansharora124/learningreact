@@ -4,21 +4,54 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [inputValue, setInputValue] = useState("")
+const [todoList,setTodoList]=useState([]);
+const [newTask,setNewTask]=useState("");
 
-  const handleInputChange = (event) => {
-    // update state so the UI reflects typing
-    setInputValue(event.target.value)
-    console.log(event.target.value);
-  }
+const handleChange=(event)=>{
+setNewTask(event.target.value);
+};
 
-  return (
-    <div className='App'>
-      <input type='text' value={inputValue} onChange={handleInputChange} />
-      {inputValue}
-    </div>
-  )
+
+
+const addTask = () =>{
+
+setTodoList([...todoList,newTask]);
+};
+ 
+const deleteTask=(taskname)=>{
+  const newTOdoList=todoList.filter((task)=>{
+if(task===taskname){
+  return false;
+
+}else{
+  return true;
 }
+  });
+ setTodoList(newTOdoList)
+};
 
-export default App
+
+return (
+   
+<div className='App'>
+
+ <div className='addtask'>
+    <input onChange={handleChange} />
+    <button onClick={addTask}>press</button>
+    
+   </div>
+  <div className='list'>
+    {todoList.map((task)=>{
+      return (
+      <div>
+        <h1>{task}</h1>
+        <button onClick={()=>deleteTask(task)}>X</button>
+      </div>)
+    })}
+  </div>
+
+</div>
+  
+);
+  }
+export default App;
