@@ -14,20 +14,19 @@ setNewTask(event.target.value);
 
 
 const addTask = () =>{
+  const task={
+    id:todoList.length===0 ? 1: todoList[todoList.length-1].id+1,
+    taskname:newTask,
 
-setTodoList([...todoList,newTask]);
+  };
+
+setTodoList([...todoList,task]);
 };
  
-const deleteTask=(taskname)=>{
-  const newTOdoList=todoList.filter((task)=>{
-if(task===taskname){
-  return false;
-
-}else{
-  return true;
-}
-  });
- setTodoList(newTOdoList)
+const deleteTask=(id)=>{
+  
+  
+ setTodoList(todoList.filter((task)=> task.id !==id))
 };
 
 
@@ -44,8 +43,8 @@ return (
     {todoList.map((task)=>{
       return (
       <div>
-        <h1>{task}</h1>
-        <button onClick={()=>deleteTask(task)}>X</button>
+        <h1>{task.taskname}</h1>
+        <button onClick={()=>deleteTask(task.id)}>X</button>
       </div>)
     })}
   </div>
