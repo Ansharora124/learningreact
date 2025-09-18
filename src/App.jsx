@@ -29,6 +29,19 @@ const deleteTask=(id)=>{
  setTodoList(todoList.filter((task)=> task.id !==id))
 };
 
+const completeTask=(id)=>{
+  setTodoList(
+    todoList.map((task)=>{
+      if(task.id===id){
+        return {...task,completed:true};
+      }
+      else{
+        return task;
+      }
+    })
+  )
+
+};
 
 return (
    
@@ -43,8 +56,10 @@ return (
     {todoList.map((task)=>{
       return (
       <div>
-        <h1>{task.taskname}</h1>
+       <h1 className={task.completed ? "completed" : ""}>{task.taskname}</h1>
+
         <button onClick={()=>deleteTask(task.id)}>X</button>
+        <button onClick={()=>completeTask(task.id)}>task completed</button>
       </div>)
     })}
   </div>

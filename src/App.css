@@ -1,3 +1,8 @@
+.completed {
+  color: green;
+  text-decoration: line-through;
+  transition: all 0.3s ease;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
