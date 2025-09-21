@@ -1,5 +1,5 @@
 .completed {
-  color: green;
+  color: rgb(232, 10, 10);
   text-decoration: line-through;
   transition: all 0.3s ease;
 }
