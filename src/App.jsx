@@ -1,34 +1,43 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
-import {Text} from "./Text"
+
+import axios from 'axios'
 function App() {
 
-const [showText,setShowText]=useState(false);
+  const [name,setName]=useState("");
+
+const [predictAge,setPredictedAge]=useState(null);
 
 
 
-
+  const fetchData=()=>{
+  axios.get(`https://api.agify.io/?name=${name}`).then((res)=>{
+  setPredictedAge(res.data);
+  });
+};
   
-  
- 
-
-
 
 return (
-   
 <div className='App'>
-<button onClick={()=>{
-  setShowText(!showText);
+  <input placeholder='write name...'
+  onChange={(event)=>{
+    setName(event.target.value);
 
-}}>
-  show text
-</button>
- {showText&&<Text/>}
+  }}
+/>
+<button onClick={fetchData}>Find</button>
+
+
+<h1>Name>>{predictAge?.name}</h1>
+<h1>Predicted Count>>{predictAge?.count}</h1>
+<h1>Predicted age>>{predictAge?.age}</h1>
 
 </div>
-  
+
+
 );
+   
+
   }
 export default App;
