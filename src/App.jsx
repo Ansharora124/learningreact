@@ -1,43 +1,27 @@
-import { useState } from 'react'
-
 import './App.css'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Home } from './pages/Home'
+import { Contact } from './pages/Contact'
+import { Manage } from './pages/Manage'
 
-import axios from 'axios'
 function App() {
+  return (
+    <div className='App'>
+      <Router>
+        <div>
+     <Link to='/'>Home</Link>
+     <Link to='/Manage'>Manage</Link>
+     <Link to='/Contact'>Contact</Link>
+        </div>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/manage' element={<Manage />} />
+          <Route path='*' element={<h1>404 page not found</h1>}/>
+        </Routes>
+      </Router>
+    </div>
+  )
+}
 
-  const [name,setName]=useState("");
-
-const [predictAge,setPredictedAge]=useState(null);
-
-
-
-  const fetchData=()=>{
-  axios.get(`https://api.agify.io/?name=${name}`).then((res)=>{
-  setPredictedAge(res.data);
-  });
-};
-  
-
-return (
-<div className='App'>
-  <input placeholder='write name...'
-  onChange={(event)=>{
-    setName(event.target.value);
-
-  }}
-/>
-<button onClick={fetchData}>Find</button>
-
-
-<h1>Name>>{predictAge?.name}</h1>
-<h1>Predicted Count>>{predictAge?.count}</h1>
-<h1>Predicted age>>{predictAge?.age}</h1>
-
-</div>
-
-
-);
-   
-
-  }
-export default App;
+export default App
